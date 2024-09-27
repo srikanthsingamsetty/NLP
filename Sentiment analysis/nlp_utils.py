@@ -139,4 +139,41 @@ def remove_contraction(sample_text):
       sample_text = list(map(r"{}".format(key),'{}'.format(value),sample_text))
   return sample_text
 
+special = string.punctuation
+def w_tokenize(sentence):
+    sentence = remove_contraction(sentence)
+    tokens = nltk.word_tokenize(sentence)
+    without_special =[]
+    for words in tokens:
+        if words not in special:
+            without_special.append(words)
 
+    return without_special
+
+def stemming(sentence):
+    tokens = w_tokenize(sentence)
+    stem_words=[]
+    for w in tokens:
+        stem_words.append(snow.stem(w))
+
+    return " ".join(stem_words)
+
+def lemmatiazation(sentence):
+    tokens = w_tokenize(sentence)
+    tag_list = pos_tag(tokens,tagset=none)
+    lema =[]
+
+    for token,pos_token in tag_list:
+        
+        if pos_token.startswith('V'): 
+            pos_val = 'v'
+        elif pos_token.startswith('J'): 
+            pos_val = 'a'
+        elif pos_token.startswith('R'): 
+            pos_val = 'r'
+        else:
+            pos_val = 'n'
+        lemma_token  =lemma.lemmatize(token,pos_val)
+        lema.append(lemma_token)
+    return lema
+    
