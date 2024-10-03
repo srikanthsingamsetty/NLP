@@ -159,9 +159,10 @@ def stemming(sentence):
 
     return " ".join(stem_words)
 
+lemma = WordNetLemmatizer()
 def lemmatiazation(sentence):
     tokens = w_tokenize(sentence)
-    tag_list = pos_tag(tokens,tagset=none)
+    tag_list = pos_tag(tokens,tagset=None)
     lema =[]
 
     for token,pos_token in tag_list:
